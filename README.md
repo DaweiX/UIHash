@@ -4,11 +4,11 @@ UIHash
 Detecting similar user interfaces (UIs) in Android apps by a grid-based representation.
 
 Cite
-====
+----
 > Jiawei Li, Jian Mao, Jun Zeng, Qixiao Lin, Shaowen Feng, and Zhenkai Liang. UIHash: Detecting Similar Android UIs through Grid-Based Visual Appearance Representation. In USENIX Security Symposium, 2023.
 
 Requirements
-=============
+------------
 
 We develop UIHash on Python3.7 and test it on Python3.7.4 and Python3.7.9.
 
@@ -39,21 +39,18 @@ The following packages are used to collect UIs and other app features:
 We use ADB (1.0.41, Version 31.0.3-7562133) to communicate with Android devices.
 
 Datasets
-===================
+--------
 
 We list the public datasets used in the paper as follows:
 
-- RePack dataset
-   * RePack (https://github.com/serval-snt-uni-lu/RePack) is an Android repackaged app dataset collected from AndroZoo (https://androzoo.uni.lu/). Its ground truth listed over 15,000 app pairs. We use the dataset to evaluate the effectiveness of UIHash.
+- RePack dataset: RePack (https://github.com/serval-snt-uni-lu/RePack) is an Android repackaged app dataset collected from AndroZoo (https://androzoo.uni.lu/). Its ground truth listed over 15,000 app pairs. We use the dataset to evaluate the effectiveness of UIHash.
 
-- Malware dataset
-   * RmvDroid (https://ieeexplore.ieee.org/document/8816783) is an Android malware dataset, containing 9,133 samples that belong to 56 malware families with high confidence. The apps are collected by analyzing Google Play snapshots across different years. Since there is no UI ground truth for this dataset, we take the dataset to evaluate UIHash's capacity of discovering similar UI clusters.  
+- Malware dataset: RmvDroid (https://ieeexplore.ieee.org/document/8816783) is an Android malware dataset, containing 9,133 samples that belong to 56 malware families with high confidence. The apps are collected by analyzing Google Play snapshots across different years. Since there is no UI ground truth for this dataset, we take the dataset to evaluate UIHash's capacity of discovering similar UI clusters.  
 
-- Rico dataset
-   * Rico (http://interactionmining.org/rico) is an Android UI dataset with over 72K unique UIs. We use the dataset in our implementation to improve the effectiveness of the CNN model for view image reidentification.
+- Rico dataset: Rico (http://interactionmining.org/rico) is an Android UI dataset with over 72K unique UIs. We use the dataset in our implementation to improve the effectiveness of the CNN model for view image reidentification.
 
 Project Structure
-=================
+--------------------
 ```
 [uihash]
 │    README.md                     This file
@@ -91,12 +88,11 @@ Project Structure
 ```
 
 Usage
-=============
+--------
 
 To demonstrate the reproducibility of the best performance reported in our paper and facilitate researchers to track whether the model status is consistent with ours, we provide the best parameter settings in the codes and provide the log for our training at the bottom of this document. We provide detailed end-to-end (i.e., Android apk files to results) guidance as follows:
 
-(0) Collect UIs
-------------------------
+### (0) Collect UIs
 
 Run the following command to collect UI from apk files dynamically:
 
@@ -130,8 +126,8 @@ The detailed usage of the script is:
                             logging level, default: info
 ```
 
-(1) Extract Views from UIs 
---------------------------------
+### (1) Extract Views from UIs 
+
 The first step to generating UI# is to extract view images from UI to re-identify them based on their appearances, instead of their declared names in the hierarchy or layout file. A command example to extract views is
 
 
@@ -159,8 +155,7 @@ Show help by running ``python extract_view_images.py -h``:
     --skip, -s      skip the existing items
 ```
 
-(2) Recognize Control Types 
----------------------------
+### (2) Recognize Control Types 
 
 Reclass the view images. The model will be saved or loaded in a folder named ``models``. If it does not exist or exists but is required to be updated, then the module will train a new one. An example command is
 
@@ -207,8 +202,7 @@ batch_size  | 128        | epoch    |  12
 threshold   | 0.95       | retrain  |  False
 ------------ ------------ ---------- -----------
 
-(3) Generate UI#
-----------------
+### (3) Generate UI#
 
 Given UI hierarchy and re-identified view type, run commands like
 
@@ -258,8 +252,7 @@ Show help by running ``python uihash.py -h``:
 
 The default value for ``grid_size`` is ``5,5``, and the default value for ``filter`` is 5. If not assign an ``output_path``, it will be ``<uihash_homepath>/output/hash``.
 
-(4) Generate Dataset
-------------------------
+### (4) Generate Dataset
 
 Run ``python ./mlalgos/dataset.py -h`` to show help as below:
 
@@ -284,8 +277,7 @@ The module outputs ``Re_5x5x10.npz``, ``ReDP_5x5x10.npy and`` ``ReSP_5x5x10.npy`
 
 For unlabeled dataset generation, please use the class `WildDataSet` instead.
 
-(5) Get Results
-----------------
+### (5) Get Results
 
 Run detection based on a siamese network. Similar to the model for reidentify views, the siamese model will also be saved or loaded in a folder named ``models``. If it does not exist or exists but is required to be updated, then ``siamese.py`` will train a new one.
 
