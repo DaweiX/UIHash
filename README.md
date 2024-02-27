@@ -3,10 +3,6 @@ UIHash
 
 Detecting similar user interfaces (UIs) in Android apps by a grid-based representation.
 
-Cite
-----
-> Jiawei Li, Jian Mao, Jun Zeng, Qixiao Lin, Shaowen Feng, and Zhenkai Liang. UIHash: Detecting Similar Android UIs through Grid-Based Visual Appearance Representation. In USENIX Security Symposium, 2024.
-
 Requirements
 ------------
 
