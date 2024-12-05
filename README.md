@@ -7,6 +7,11 @@ Cite
 ----
 > Jiawei Li, Jian Mao, Jun Zeng, Qixiao Lin, Shaowen Feng, and Zhenkai Liang. UIHash: Detecting Similar Android UIs through Grid-Based Visual Appearance Representation. In USENIX Security Symposium, 2024.
 
+New: Alternative Version
+-------------------
+We also propose [UIHash-Serve](https://github.com/DaweiX/UIHash-Serve), another UIHash version that works better on headless servers.
+It uses QEMU for dynamic app testing and [Faiss](https://github.com/facebookresearch/faiss) for similarity searching. Feel free to try it!
+
 Requirements
 ------------
 
